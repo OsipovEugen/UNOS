@@ -1,0 +1,41 @@
+
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block css_additional %}
+    <link rel="stylesheet" href="{% static 'css/post_list.css' %}">
+{% endblock %}
+
+{% block title %}Post List{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+<div class="jumbotron jumbotron-fluid hurricane">
+  <div class="container">
+    <div class="title">
+    <h1>Hurricanes</h1>
+    <p>Recent Category 5 Atlantic Hurricanes</p>
+    </div>
+  </div>
+</div>
+    <a href="{% url 'post_create' %}" class="btn btn-info">Create post</a>
+
+{% for post in posts %}
+<div class="card-deck">
+ <div class="card" style="width:300px">
+     {% if post.images %}
+        <img class="card-img-top" src="{{post.images.url}}" alt="Card image" style="width:100%">
+     {% endif %}
+    <div class="card-body">
+      <h4 class="card-title">{{post.title}}</h4>
+      <h5>{{post.created_at}}</h5>
+      <p class="card-text">{{post.body|truncatewords:20}}</p>
+        <p>Author <b>{{post.author|title}}</b></p>
+      <a href="{{ post.get_absolute_url }}" class="btn btn-primary" target="_blank">Detail</a>
+    </div>
+  </div>
+ </div>
+</div>
+{% endfor %}
+{% endblock %}

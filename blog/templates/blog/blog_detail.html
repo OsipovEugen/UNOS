@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Post List{% endblock title %}
+{% block content %}
+<h1>{{ current_post.author }}</h1>
+    <h1>{{ current_post.title }}</h1>
+{% if current_post.images %}
+    <img src="{{ current_post.images.url }}" style="width:500px">>
+{% endif %}
+    <p>{{ current_post.body }}</p>
+    <h1>{{ current_post.author }}</h1>
+    <h1>{{ current_post.created_at }}</h1>
+    <a href="{{ current_post.get_delete_url }}" class="btn btn-danger">Delete</a>
+    <a href="{{ current_post.get_update_url }}" class="btn btn-primary">Edit</a>
+{% endblock %}
